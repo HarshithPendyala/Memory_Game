@@ -7,7 +7,7 @@ playerLivesCount.textContent = playerLives;
 
 const getData = () => [
     {imsSrc:'./images/beatles.jpeg',name: 'beatles'},
-    {imsSrc:'./images/blink182.jpeg',name: 'blink 182'},
+    {imsSrc:'./images/linkinpark.jpg',name: 'Linkin Park'},
     {imsSrc:'./images/fkatwigs.jpeg',name: 'fka twigs'},
     {imsSrc:'./images/fleetwood.jpeg',name: 'fleetwood'},
     {imsSrc:'./images/joy-division.jpeg',name: 'joy division'},
@@ -15,7 +15,7 @@ const getData = () => [
     {imsSrc:'./images/metallica.jpeg',name: 'metallica'},
     {imsSrc:'./images/pinkfloyd.jpeg',name: 'pink floyd'},
     {imsSrc:'./images/beatles.jpeg',name: 'beatles'},
-    {imsSrc:'./images/blink182.jpeg',name: 'blink 182'},
+    {imsSrc:'./images/linkinpark.jpg',name: 'Linkin Park'},
     {imsSrc:'./images/fkatwigs.jpeg',name: 'fka twigs'},
     {imsSrc:'./images/fleetwood.jpeg',name: 'fleetwood'},
     {imsSrc:'./images/joy-division.jpeg',name: 'joy division'},
@@ -49,6 +49,11 @@ const cardGenerator = () => {
         card.appendChild(face);
         card.appendChild(back);
 
+        card.classList.add('toggleCard');
+        setTimeout(()=>{
+            card.classList.remove('toggleCard')
+        },2500)
+         
         card.addEventListener("click", (e)=>{
             card.classList.toggle('toggleCard');
             checkCards(e);
@@ -93,23 +98,26 @@ const checkCards = (e) =>{
 }
 
 const restart = (text) => {
+    setTimeout(()=>window.alert(text),1000);
+
     let cardData = randomise();
     let faces = document.querySelectorAll('.face');
     let cards = document.querySelectorAll('.card');
+    
     section.style.pointerEvents = 'none';
     cardData.forEach((item,index)=> {
-        cards[index].classList.remove('toggleCard');
-        
+
         setTimeout(()=>{
+            cards[index].classList.remove('toggleCard');
             cards[index].style.pointerEvents = 'all';
             faces[index].src = item.imsSrc;
             cards[index].setAttribute("name",item.name);
             section.style.pointerEvents = 'all';
-        },1000);
+        },500);
     })
     playerLives = 6;
     playerLivesCount.textContent = playerLives;
-    setTimeout(()=>window.alert(text),1000);
+    
 }
 
 cardGenerator();
